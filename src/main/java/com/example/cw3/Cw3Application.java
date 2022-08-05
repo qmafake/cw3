@@ -23,6 +23,8 @@ public class Cw3Application {
         SpringApplication.run(Cw3Application.class, args);
     }
 
+    //FIXME I guess need to add some code to StorageService
+    // and maybe FileSystemStorageService
     @Override
     public void run(String... args) throws Exception {
         storageService.deleteAll();
