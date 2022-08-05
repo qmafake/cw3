@@ -1,4 +1,4 @@
-package com.example.cw3.storage;
+package com.example.storage;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

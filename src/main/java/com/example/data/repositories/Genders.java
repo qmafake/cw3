@@ -1,7 +1,7 @@
-package com.example.cw3.data.repositories;
+package com.example.data.repositories;
 
 
-import com.example.cw3.data.models.Gender_train;
+import com.example.data.models.Gender_train;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

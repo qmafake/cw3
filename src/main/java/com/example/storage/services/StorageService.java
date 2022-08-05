@@ -1,11 +1,13 @@
-package com.example.cw3.storage.services;
+package com.example.storage.services;
 
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
+@Component
 public interface StorageService {
     void init();
 

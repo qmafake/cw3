@@ -1,7 +1,7 @@
-package com.example.cw3.controllers;
+package com.example.controllers;
 
-import com.example.cw3.storage.exceptions.StorageFileNotFoundException;
-import com.example.cw3.storage.services.StorageService;
+import com.example.storage.exceptions.StorageFileNotFoundException;
+import com.example.storage.services.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class FileUploadController {
+
     private final StorageService storageService;
 
     @Autowired

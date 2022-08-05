@@ -1,12 +1,11 @@
-package com.example.cw3.storage.services;
+package com.example.storage.services;
 
-import com.example.cw3.storage.StorageProperties;
-import com.example.cw3.storage.exceptions.StorageException;
-import com.example.cw3.storage.exceptions.StorageFileNotFoundException;
+import com.example.storage.StorageProperties;
+import com.example.storage.exceptions.StorageException;
+import com.example.storage.exceptions.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +27,8 @@ public class FileSystemStorageService implements StorageService{
     public FileSystemStorageService(StorageProperties properties) {
         this.rootLocation = Paths.get(properties.getLocation());
     }
+
+
 
     @Override
     public void store(MultipartFile file) {
@@ -104,6 +105,5 @@ public class FileSystemStorageService implements StorageService{
             throw new StorageException("Could not initialize storage", e);
         }
     }
-
 
 }

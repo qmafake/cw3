@@ -1,4 +1,4 @@
-package com.example.cw3.storage.exceptions;
+package com.example.storage.exceptions;
 
 public class StorageException extends RuntimeException{
     public StorageException(String message) {

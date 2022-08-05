@@ -1,4 +1,4 @@
-package com.example.cw3.storage.exceptions;
+package com.example.storage.exceptions;
 
 public class StorageFileNotFoundException extends StorageException{
     public StorageFileNotFoundException(String message) {

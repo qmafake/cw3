@@ -1,4 +1,4 @@
-package com.example.cw3.data.models;
+package com.example.data.models;
 
 import lombok.Data;
 
