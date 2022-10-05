@@ -1,7 +1,6 @@
 package com.example.data.models;
 
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 import net.bytebuddy.utility.nullability.MaybeNull;
 
 import javax.persistence.Entity;

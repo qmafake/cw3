@@ -4,6 +4,7 @@ import com.example.storage.StorageProperties;
 import com.example.storage.exceptions.StorageException;
 import com.example.storage.exceptions.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 @Service
+@ComponentScan
 public class FileSystemStorageService implements StorageService{
     private final Path rootLocation;
 

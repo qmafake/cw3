@@ -11,7 +11,7 @@ import com.example.storage.StorageProperties;
 
 import javax.annotation.Resource;
 
-@SpringBootApplication(scanBasePackages="com.example.data")
+@SpringBootApplication(scanBasePackages="com.example")
 @EnableConfigurationProperties(StorageProperties.class)
 @EntityScan("data.models")
 public class Cw3Application implements CommandLineRunner{
