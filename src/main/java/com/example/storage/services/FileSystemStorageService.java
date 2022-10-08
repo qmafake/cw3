@@ -1,8 +1,12 @@
 package com.example.storage.services;
 
+
+import com.example.data.repositories.Gender_trainRepository;
 import com.example.storage.StorageProperties;
 import com.example.storage.exceptions.StorageException;
 import com.example.storage.exceptions.StorageFileNotFoundException;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
@@ -11,13 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.stream.Stream;
 
 @Service
@@ -28,7 +32,13 @@ public class FileSystemStorageService implements StorageService{
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
         this.rootLocation = Paths.get(properties.getLocation());
+
     }
+
+    @Autowired
+   private Gender_trainRepository repository;
+
+
 
 
 
@@ -50,6 +60,22 @@ public class FileSystemStorageService implements StorageService{
                 Files.copy(inputStream, destinationFile,
                         StandardCopyOption.REPLACE_EXISTING);
             }
+
+//            // parse CSV file to create a list of `User` objects
+//            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+//
+//                // create csv bean reader
+//                CsvToBean<Gender_train> csvToBean = new CsvToBeanBuilder(reader)
+//                        .withType(Gender_train.class)
+//                        .withIgnoreLeadingWhiteSpace(false)
+//                        .build();
+//
+//                // convert `CsvToBean` object to list of users
+//                List<Gender_train> genders = csvToBean.parse();
+//                repository.saveAll(genders);
+//            }catch (Exception ex) {
+//
+//            }
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file.", e);
