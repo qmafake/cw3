@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 
 @SpringBootApplication(scanBasePackages="com.example")
 @EnableConfigurationProperties(StorageProperties.class)
-@EntityScan("data.models")
+@EntityScan("com.example.data.models")
 @EnableJpaRepositories("com.example.data.repositories")
 
 

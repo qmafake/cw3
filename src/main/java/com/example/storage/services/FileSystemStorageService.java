@@ -1,16 +1,24 @@
 package com.example.storage.services;
 
 
+import com.example.data.models.Gender_train;
+import com.example.data.models.Tr_types;
+import com.example.data.models.Transactions;
 import com.example.data.repositories.Gender_trainRepository;
+import com.example.data.repositories.Tr_mcc_codesRepo;
+import com.example.data.repositories.Tr_typesRepo;
+import com.example.data.repositories.TransactionsRepo;
 import com.example.storage.StorageProperties;
 import com.example.storage.exceptions.StorageException;
 import com.example.storage.exceptions.StorageFileNotFoundException;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.sun.jdi.InterfaceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,7 +44,13 @@ public class FileSystemStorageService implements StorageService{
     }
 
     @Autowired
-   private Gender_trainRepository repository;
+   private Gender_trainRepository gender_trainRepository;
+    @Autowired
+    private Tr_mcc_codesRepo codesRepo;
+    @Autowired
+    private Tr_typesRepo typesRepo;
+    @Autowired
+    private TransactionsRepo transactionsRepo;
 
 
 
@@ -61,7 +75,17 @@ public class FileSystemStorageService implements StorageService{
                         StandardCopyOption.REPLACE_EXISTING);
             }
 
-//            // parse CSV file to create a list of `User` objects
+            switch (file.getOriginalFilename()){
+                case "gender_train.csv":
+                    save(file, Gender_train.class, gender_trainRepository);
+                case "transactions.csv":
+                    save(file, Transactions.class, transactionsRepo);
+                case "tr_mcc_codes.csv":
+                    save(file, Tr_mcc_codesRepo.class, codesRepo);
+                case "tr_types.csv":
+                    save(file, Tr_types.class, typesRepo);
+            }
+            // parse CSV file to create a list of `User` objects
 //            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 //
 //                // create csv bean reader
@@ -79,6 +103,23 @@ public class FileSystemStorageService implements StorageService{
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file.", e);
+        }
+    }
+
+    @Override
+    public <Models> void save(MultipartFile file, Class Models, JpaRepository repos){
+        try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+            // create csv bean reader
+            CsvToBean<Models> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(Models)
+                    .withIgnoreLeadingWhiteSpace(false)
+                    .build();
+
+            // convert `CsvToBean` object to list of users
+            List<Models> models = csvToBean.parse();
+            repos.saveAll(models);
+        }catch (Exception ex) {
+
         }
     }
 
