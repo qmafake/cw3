@@ -2,6 +2,7 @@ package com.example.storage.services;
 
 
 import com.example.data.models.Gender_train;
+import com.example.data.models.Tr_mcc_codes;
 import com.example.data.models.Tr_types;
 import com.example.data.models.Transactions;
 import com.example.data.repositories.Gender_trainRepository;
@@ -81,7 +82,7 @@ public class FileSystemStorageService implements StorageService{
                 case "transactions.csv":
                     save(file, Transactions.class, transactionsRepo);
                 case "tr_mcc_codes.csv":
-                    save(file, Tr_mcc_codesRepo.class, codesRepo);
+                    save(file, Tr_mcc_codes.class, codesRepo);
                 case "tr_types.csv":
                     save(file, Tr_types.class, typesRepo);
             }
@@ -118,6 +119,7 @@ public class FileSystemStorageService implements StorageService{
             // convert `CsvToBean` object to list of users
             List<Models> models = csvToBean.parse();
             repos.saveAll(models);
+
         }catch (Exception ex) {
 
         }
