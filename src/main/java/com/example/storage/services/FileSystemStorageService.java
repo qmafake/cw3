@@ -3,7 +3,7 @@ package com.example.storage.services;
 
 import com.example.data.models.Gender_train;
 import com.example.data.models.Tr_mcc_codes;
-import com.example.data.models.Tr_types;
+import com.example.data.models.Tr_type;
 import com.example.data.models.Transactions;
 import com.example.data.repositories.Gender_trainRepository;
 import com.example.data.repositories.Tr_mcc_codesRepo;
@@ -14,7 +14,6 @@ import com.example.storage.exceptions.StorageException;
 import com.example.storage.exceptions.StorageFileNotFoundException;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.sun.jdi.InterfaceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.Resource;
@@ -84,7 +83,7 @@ public class FileSystemStorageService implements StorageService{
                 case "tr_mcc_codes.csv":
                     save(file, Tr_mcc_codes.class, codesRepo);
                 case "tr_types.csv":
-                    save(file, Tr_types.class, typesRepo);
+                    save(file, Tr_type.class, typesRepo);
             }
             // parse CSV file to create a list of `User` objects
 //            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {

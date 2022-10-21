@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Tr_types {
+public class Tr_type {
     @Id
     private Integer tr_type;
 

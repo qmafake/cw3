@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,8 +14,8 @@ public class Transactions {
     @Id
     private Integer customer_id;
 
-    @CsvDate("dd HH:mm:ss")
-    private LocalDateTime tr_datetime;
+    //@CsvDate("dd HH:mm:ss")
+    private String tr_datetime;
 
     private Integer mcc_code;
 
