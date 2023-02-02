@@ -56,6 +56,8 @@ public class Cw3Application implements CommandLineRunner{
         eric.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
 
+        ddd.setPublisher(publisher);
+        publisher.getBooks().add(ddd);
 
         System.out.println("Eric = " + eric);
         System.out.println("ddd = " + ddd);
@@ -77,6 +79,8 @@ public class Cw3Application implements CommandLineRunner{
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
 
+        noEJB.setPublisher(publisher);
+
         Thread.sleep(3000);
 
         System.out.println("Save author Rod details - NOT WORKING PROPERLY");
@@ -84,10 +88,14 @@ public class Cw3Application implements CommandLineRunner{
 //        authorRepository.save(rod); //TODO: The PK is not incrementing causing a PK violation
 //        bookRepository.save(noEJB);
 
+//        publisherRepository.save(publisher);
+
         System.out.println("Author count: " + authorRepository.count() );        // findAll().get(0));
         System.out.println("Books count: " + bookRepository.count() );
 
         System.out.println("Total Number of Books = " + bookRepository.count() );
+
+        System.out.println("Publisher Number of Books = " + publisher.getBooks().size());
 
         System.out.println("Test" + authorRepository.findAll());
         System.out.println("Test" + bookRepository.findAll());
